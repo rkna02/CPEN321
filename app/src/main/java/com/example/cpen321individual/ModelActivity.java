@@ -24,8 +24,6 @@ import java.util.Locale;
 public class ModelActivity extends AppCompatActivity implements LocationListener {
 
     private LocationManager locationManager; // Continuously pulls location information
-    private Geocoder geocoder = new Geocoder(ModelActivity.this, Locale.getDefault());
-    private List<Address> addressList;
     final static String TAG = "ModelActivity";
 
     @Override
@@ -36,6 +34,9 @@ public class ModelActivity extends AppCompatActivity implements LocationListener
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
+        } else {
+            TextView cityTextView = findViewById(R.id.city_textView);
+            cityTextView.setText("Current City: \nUnknown");
         }
 
         TextView manufactorTextView = findViewById(R.id.manufactor_textView);
@@ -48,20 +49,18 @@ public class ModelActivity extends AppCompatActivity implements LocationListener
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
+        List<Address> addressList;
+        Geocoder geocoder = new Geocoder(ModelActivity.this, Locale.getDefault());
         TextView cityTextView = findViewById(R.id.city_textView);
         try {
             addressList = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
             String city = addressList.get(0).getLocality();
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                cityTextView.setText("Current City: \nUnknown");
-            } else {
-                cityTextView.setText("Current City: \n" + city);
-            }
+            cityTextView.setText("Current City: \n" + city);
+
         } catch (IOException e) {
-            cityTextView.setText("Current City: \nUnknown");
-            Log.d(TAG, "Location cannot be found");
             e.printStackTrace();
         }
 
     }
+
 }

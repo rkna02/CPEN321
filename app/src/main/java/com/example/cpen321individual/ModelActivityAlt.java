@@ -21,5 +21,8 @@ public class ModelActivityAlt extends AppCompatActivity {
         TextView manufacturerTextView = findViewById(R.id.manufactor_textView2);
         manufacturerTextView.setText("Manufacturer: \n" + Build.MANUFACTURER);
 
+        TextView modelTextView = findViewById(R.id.model_textView2);
+        modelTextView.setText("Model: \n" + Build.MODEL);
+
     }
 }
