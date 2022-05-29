@@ -2,6 +2,6 @@
     <string name="app_name">CPEN321 Individual</string>
     <string name="maps_button_caption">My Favourite City</string>
     <string name="device_info_button_caption">Phone Model</string>
-    <string name="weather_button_caption">Weather</string>
+    <string name="weather_button_caption">Weather of favourite city</string>
     <string name="banner_adunit_id">ca-app-pub-3940256099942544/6300978111</string>
 </resources>
