@@ -188,7 +188,9 @@ public class MainActivity extends AppCompatActivity {
 
             // Send token to your back-end
             // Move to another activity
-
+            Intent serverIntent = new Intent(MainActivity.this, ServerActivity.class);
+            startActivity(serverIntent);
+            Log.d(TAG, "Trying to load device phone model information");
         }
     }
 
